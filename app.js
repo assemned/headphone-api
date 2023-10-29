@@ -5,7 +5,6 @@ import newsletterRoute from "./routes/newsletterRoute.js";
 import paymentRoute from "./routes/paymentRoute.js";
 import cors from "cors";
 import dotenv from "dotenv";
-import path from "path";
 
 dotenv.config();
 const app = express();
@@ -27,13 +26,6 @@ app.get("/", (req, res) => {
 app.use("/newsletter", newsletterRoute);
 
 app.use("/payment", paymentRoute);
-
-app.use(express.static(path.join(__dirname, "../client/src")));
-
-// Handle routing for all other routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/src", "index.html"));
-});
 
 mongoose
   .connect(process.env.MONGODB_URL)
