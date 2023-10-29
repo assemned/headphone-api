@@ -4,11 +4,10 @@ import mongoose from "mongoose";
 import newsletterRoute from "./routes/newsletterRoute.js";
 import paymentRoute from "./routes/paymentRoute.js";
 import cors from "cors";
+import dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
-
-//Midelware for parsing request body
-app.use(express.json());
 
 //Midelware for handling CORS policy
 app.use(
@@ -16,6 +15,9 @@ app.use(
     origin: "https://headphone.onrender.com",
   })
 );
+
+//Midelware for parsing request body
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.status(200).send("Welcome");
@@ -26,7 +28,7 @@ app.use("/newsletter", newsletterRoute);
 app.use("/payment", paymentRoute);
 
 mongoose
-  .connect(mongodbURL)
+  .connect(process.env.MONGODB_URL)
   .then(() => {
     console.log("App connected to Data base");
     app.listen(PORT, () => {
