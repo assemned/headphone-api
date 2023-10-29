@@ -12,7 +12,7 @@ const app = express();
 //Midelware for handling CORS policy
 app.use(
   cors({
-    origin: "https://headphone.onrender.com",
+    origin: "https://headphone-otzo.onrender.com",
   })
 );
 
